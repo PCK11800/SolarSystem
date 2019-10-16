@@ -21,7 +21,10 @@ public class MainSystem{
     private Planet Neptune = new Planet(400, 40, 0.2, Sun, "#5B5DDF");
     
     //Moon(distance, diameter, speed, planet, colour, array)
-    private Moon Luna = new Moon(30, 10, 5, Earth, "DARK_GRAY");
+    private Moon Luna = new Moon(5, 10, 5, Earth, "DARK_GRAY");
+    private Moon Io = new Moon(30, 5, 5, Jupiter, "#FFF49C");
+    private Moon Europa = new Moon(40, 5, 10, Jupiter, "#C6C3CC");
+    private Moon Ganymede = new Moon(50, 5, 3, Jupiter, "#B58E00");
 
     private void createSystem(int width, int height){
         solarSystem = new SolarSystem(width, height);
@@ -37,6 +40,9 @@ public class MainSystem{
         planetArray.add(Neptune);
 
         moonArray.add(Luna);
+        moonArray.add(Io);
+        moonArray.add(Europa);
+        moonArray.add(Ganymede);
     }
 
     private void drawStars(){
