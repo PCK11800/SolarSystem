@@ -7,6 +7,7 @@ public class MainSystem{
     public ArrayList<Star> starArray = new ArrayList<>();
     public ArrayList<Planet> planetArray = new ArrayList<>();
     public ArrayList<Moon> moonArray = new ArrayList<>();
+    public ArrayList<AsteroidBelt> asteroidBeltArray = new ArrayList<>();
 
     private Star Sun = new Star(50, "YELLOW");
 
@@ -26,6 +27,9 @@ public class MainSystem{
     private Moon Europa = new Moon(40, 5, 10, Jupiter, "#C6C3CC");
     private Moon Ganymede = new Moon(50, 5, 3, Jupiter, "#B58E00");
 
+    //AsteroidBelt(distanceFromCenter, diameter, beltCoherence, diameterCoherence, orbitialSpeed, numberOfAsteroids, orbitingStar, colour)
+    private AsteroidBelt JovianBelt = new AsteroidBelt(275, 5, 20, 1, 3, 100, Sun, "WHITE");
+
     private void createSystem(int width, int height){
         solarSystem = new SolarSystem(width, height);
         starArray.add(Sun);
@@ -43,6 +47,8 @@ public class MainSystem{
         moonArray.add(Io);
         moonArray.add(Europa);
         moonArray.add(Ganymede);
+
+        asteroidBeltArray.add(JovianBelt);
     }
 
     private void drawStars(){
@@ -67,7 +73,7 @@ public class MainSystem{
             double diameter = thisPlanet.getObjectDiameter();
             String colour = thisPlanet.getObjectColour();
 
-            planetArray.get(i).orbitOnce();
+            thisPlanet.orbitOnce();
             solarSystem.drawSolarObject(distanceFromCenter, angle, diameter, colour);
         }
     }
@@ -83,8 +89,23 @@ public class MainSystem{
             double centreOfRotationDistance = thisMoon.getCenterOfRotationDistance();
             double centreOfRotationAngle = thisMoon.getCenterOfRotationAngle();
 
-            moonArray.get(i).orbitOnce();
+            thisMoon.orbitOnce();
             solarSystem.drawSolarObjectAbout(distanceFromCenter, angle, diameter, colour, centreOfRotationDistance, centreOfRotationAngle);
+        }
+    }
+
+    private void drawAsteroidBelts(){
+        for(int i = 0; i < asteroidBeltArray.size(); i++){
+            AsteroidBelt thisBelt = asteroidBeltArray.get(i);
+            for(int a = 0; a < thisBelt.getAsteroids().size(); a++){
+                Planet thisAsteroid = thisBelt.getAsteroids().get(a);
+                double distanceFromCenter = thisAsteroid.getDistanceFromCenter();
+                double angle = thisAsteroid.getOrbitalAngle();
+                double diameter = thisAsteroid.getObjectDiameter();
+                String colour = thisAsteroid.getObjectColour();
+                solarSystem.drawSolarObject(distanceFromCenter, angle, diameter, colour);
+            }
+            thisBelt.moveBeltOnce();
         }
     }
 
@@ -98,6 +119,7 @@ public class MainSystem{
             drawStars();
             drawPlanets();
             drawMoons();
+            drawAsteroidBelts();
         }
     }
 
