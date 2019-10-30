@@ -8,18 +8,20 @@ public class AsteroidBelt extends CelestialObject{
     private double beltCoherence;
     private int numberOfAsteroids;
     private double orbitalSpeed;
+    private double orbitalSpeedCoherence;
     private Star orbitingStar;
     private double diameterCoherence;
 
     //An asteroid is a very very small planet anyway - Function the same way
     private ArrayList<Planet> asteroidList = new ArrayList<>();
 
-    public AsteroidBelt(double distanceFromCenter, double objectDiameter, double beltCoherence, double diameterCoherence, double orbitalSpeed, int numberOfAsteroids, Star orbitingStar, String beltColour){
+    public AsteroidBelt(double distanceFromCenter, double objectDiameter, double beltCoherence, double diameterCoherence, double orbitalSpeed, double orbitalSpeedCoherence, int numberOfAsteroids, Star orbitingStar, String beltColour){
         setDistanceFromCenter(distanceFromCenter);
         setObjectDiameter(objectDiameter);
         this.beltCoherence = beltCoherence;
         this.diameterCoherence = diameterCoherence;
         this.orbitalSpeed = orbitalSpeed;
+        this.orbitalSpeedCoherence = orbitalSpeedCoherence;
         this.numberOfAsteroids = numberOfAsteroids;
         this.orbitingStar = orbitingStar;
         setColour(beltColour);
@@ -31,7 +33,8 @@ public class AsteroidBelt extends CelestialObject{
         for(int i = 0; i < numberOfAsteroids; i++){
             double normalizedObjectDistance = getDistanceFromCenter() + (Math.random() * ((2 * beltCoherence) + 1)) - beltCoherence;
             double normalizedDiameter = getObjectDiameter() + (Math.random() * ((2 * diameterCoherence) + 1)) - diameterCoherence;
-            Planet asteroid = new Planet(normalizedObjectDistance, normalizedDiameter, orbitalSpeed, orbitingStar, getObjectColour());
+            double normalizedOrbitalSpeed = orbitalSpeed + (Math.random() * ((2 * orbitalSpeedCoherence) + 1)) - orbitalSpeedCoherence;
+            Planet asteroid = new Planet(normalizedObjectDistance, normalizedDiameter, normalizedOrbitalSpeed, orbitingStar, getObjectColour());
             asteroid.setOrbitalAngle(Math.random() * 361);
             asteroidList.add(asteroid);
         }

@@ -27,8 +27,8 @@ public class MainSystem{
     private Moon Europa = new Moon(40, 5, 10, Jupiter, "#C6C3CC");
     private Moon Ganymede = new Moon(50, 5, 3, Jupiter, "#B58E00");
 
-    //AsteroidBelt(distanceFromCenter, diameter, beltCoherence, diameterCoherence, orbitialSpeed, numberOfAsteroids, orbitingStar, colour)
-    private AsteroidBelt JovianBelt = new AsteroidBelt(275, 5, 20, 1, 3, 100, Sun, "WHITE");
+    //AsteroidBelt(distanceFromCenter, diameter, beltCoherence, diameterCoherence, orbitialSpeed, orbitalSpeedCoherence, numberOfAsteroids, orbitingStar, colour)
+    private AsteroidBelt JovianBelt = new AsteroidBelt(275, 5, 20, 1, 5, 3, 200, Sun, "WHITE");
 
     private void createSystem(int width, int height){
         solarSystem = new SolarSystem(width, height);
